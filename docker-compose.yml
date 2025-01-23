@@ -30,11 +30,9 @@ services:
       PRE_BACKUP_SCRIPT: |
         echo "Before backup!"
         echo "Also before backup from $$RCON_HOST to $$DEST_DIR"        
-      POST_BACKUP_SCRIPT_FILE: /post-backup.sh
       PRUNE_BACKUPS_DAYS: 5
     volumes:
       # 與Minecraft伺服器共用目錄，唯讀
       - ./data:/data:ro
       # 備份至mc-backups
       - ./mc-backups:/backups
-      - ./post-backup.sh:/post-backup.sh:ro
