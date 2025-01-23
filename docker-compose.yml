@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  # 伺服器服務
+  minecraft-server:
+    image: itzg/minecraft-server
+    container_name: "minecraft-server"
+    tty: true
+    stdin_open: true
+    ports:
+      - "25565:25565"
+    environment:
+      # 自動同意伺服器的EULA
+      EULA: "TRUE"
+      # 設定分配8GB RAM
+      MEMORY: "4G"
+      # 設定JVM啟動參數，設定最多使用75% RAM
+      JVM_OPTS: "-XX:MaxRAMPercentage=75"
+      DIFFICULTY: "hard"
+    volumes:
+      # 在目前的目錄新增存放資料的目錄
+      - ./data:/data
+
+  # 自動備份服務
+  minecraft-server-backups:
+    image: itzg/mc-backup
+    environment:
+      BACKUP_INTERVAL: "24h"
+      RCON_HOST: minecraft-server
+      PRE_BACKUP_SCRIPT: |
+        echo "Before backup!"
+        echo "Also before backup from $$RCON_HOST to $$DEST_DIR"        
+      POST_BACKUP_SCRIPT_FILE: /post-backup.sh
+      PRUNE_BACKUPS_DAYS: 5
+    volumes:
+      # 與Minecraft伺服器共用目錄，唯讀
+      - ./data:/data:ro
+      # 備份至mc-backups
+      - ./mc-backups:/backups
+      - ./post-backup.sh:/post-backup.sh:ro

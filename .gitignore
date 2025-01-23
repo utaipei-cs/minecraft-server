@@ -1,0 +1,6 @@
+data/*
+!data/.gitkeep
+mc-backups/*
+!mc-backups/.gitkeep
+post-backups.sh/*
+!post-backups.sh/.gitkeep
