@@ -40,6 +40,11 @@ services:
       # 備份至mc-backups
       - mc-backups:/backups
 
+networks:
+  cloudflare-tunnel:
+    external: 
+      name: cloudflare-tunnel
+
 volumes:
   data:
     driver: local
