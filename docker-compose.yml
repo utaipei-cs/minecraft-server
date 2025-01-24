@@ -42,8 +42,7 @@ services:
 
 networks:
   cloudflare-tunnel:
-    external: 
-      name: cloudflare-tunnel
+    external: true
 
 volumes:
   data:
