@@ -19,7 +19,7 @@ services:
       DIFFICULTY: "hard"
     volumes:
       # 在目前的目錄新增存放資料的目錄
-      - ./data:/data
+      - data:/data
 
   # 自動備份服務
   minecraft-server-backups:
@@ -33,6 +33,12 @@ services:
       PRUNE_BACKUPS_DAYS: 5
     volumes:
       # 與Minecraft伺服器共用目錄，唯讀
-      - ./data:/data:ro
+      - data:/data:ro
       # 備份至mc-backups
-      - ./mc-backups:/backups
+      - mc-backups:/backups
+
+volumes:
+  data:
+    driver: local
+  mc-backups:
+    driver: local
