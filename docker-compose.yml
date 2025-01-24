@@ -5,6 +5,8 @@ services:
   minecraft-server:
     image: itzg/minecraft-server
     container_name: "minecraft-server"
+    networks:
+      - cloudflare-tunnel
     tty: true
     stdin_open: true
     ports:
@@ -17,6 +19,7 @@ services:
       # 設定JVM啟動參數，設定最多使用75% RAM
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
+      ENABLE_RCON: "false"
     volumes:
       # 在目前的目錄新增存放資料的目錄
       - data:/data
