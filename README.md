@@ -2,7 +2,7 @@
 系上minecraft 伺服器
 
 ### start up server
-需要三個個env 變數
+需要三個 env 變數
 
 ```bash
 NAS_USERNAME=username
