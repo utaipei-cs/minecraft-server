@@ -4,3 +4,4 @@ mc-backups/*
 !mc-backups/.gitkeep
 post-backups.sh/*
 !post-backups.sh/.gitkeep
+.env
