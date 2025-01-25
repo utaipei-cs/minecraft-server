@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # 伺服器服務
   minecraft-server:
     image: itzg/minecraft-server
     container_name: "minecraft-server"
@@ -12,19 +11,14 @@ services:
     ports:
       - "25565:25565"
     environment:
-      # 自動同意伺服器的EULA
       EULA: "TRUE"
-      # 設定分配8GB RAM
-      MEMORY: "4G"
-      # 設定JVM啟動參數，設定最多使用75% RAM
+      MEMORY: "6G"
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
       ENABLE_RCON: "false"
     volumes:
-      # 在目前的目錄新增存放資料的目錄
-      - data:/data
+      - minecraft-data:/data
 
-  # 自動備份服務
   minecraft-server-backups:
     image: itzg/mc-backup
     environment:
@@ -35,17 +29,22 @@ services:
         echo "Also before backup from $$RCON_HOST to $$DEST_DIR"        
       PRUNE_BACKUPS_DAYS: 5
     volumes:
-      # 與Minecraft伺服器共用目錄，唯讀
-      - data:/data:ro
-      # 備份至mc-backups
-      - mc-backups:/backups
+      - minecraft-data:/data:ro
+      - minecraft-backup:/backups
 
 networks:
   cloudflare-tunnel:
     external: true
+    name: cloudflare-tunnel
 
 volumes:
-  data:
-    driver: local
-  mc-backups:
-    driver: local
+  minecraft-data:
+    driver_opts:
+      type: cifs
+      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,dir_mode=0777,file_mode=0777
+      device: //${NAS_IP}/mc/data
+  minecraft-backup:
+    driver_opts:
+      type: cifs
+      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,dir_mode=0777,file_mode=0777
+      device: //${NAS_IP}/mc/backup
