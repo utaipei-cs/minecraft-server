@@ -16,6 +16,7 @@ services:
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
       ENABLE_RCON: "false"
+      MOTD: CSSA minecraft server
     volumes:
       - minecraft-data:/data
 
@@ -23,7 +24,7 @@ services:
     image: itzg/mc-backup
     environment:
       BACKUP_INTERVAL: "24h"
-      RCON_HOST: minecraft-server
+      ENABLE_RCON: "false"
       PRE_BACKUP_SCRIPT: |
         echo "Before backup!"
         echo "Also before backup from $$RCON_HOST to $$DEST_DIR"        
