@@ -39,7 +39,7 @@ networks:
     external: true
     name: cloudflare-tunnel
   minecraft-networks:
-    driver: bridge
+    driver: overlay
 
 volumes:
   minecraft-data:
