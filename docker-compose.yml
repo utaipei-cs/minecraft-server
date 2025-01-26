@@ -5,12 +5,11 @@ services:
     image: itzg/minecraft-server
     networks:
       - cloudflare-tunnel
+      - minecraft-networks
     tty: true
     stdin_open: true
     ports:
       - "25565:25565"
-    expose:
-      - 25575
     environment:
       EULA: "TRUE"
       MEMORY: "6G"
@@ -22,6 +21,8 @@ services:
 
   minecraft-server-backups:
     image: itzg/mc-backup
+    networks:
+      - minecraft-networks
     environment:
       BACKUP_INTERVAL: "24h"
       RCON_HOST: minecraft-server
@@ -37,7 +38,10 @@ networks:
   cloudflare-tunnel:
     external: true
     name: cloudflare-tunnel
-
+  minecraft-networks:
+    external: true
+    name: minecraft-networks
+  
 volumes:
   minecraft-data:
     driver_opts:
