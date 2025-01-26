@@ -23,14 +23,14 @@ services:
     image: itzg/mc-backup
     networks:
       - minecraft-networks
-    command: >
-      sh -c "chmod -R 777 /data && chmod -R 777 /backups"
     environment:
       BACKUP_INTERVAL: "24h"
       RCON_HOST: minecraft-server
       PRE_BACKUP_SCRIPT: |
         echo "Before backup!"
         echo "Also before backup from $$RCON_HOST to $$DEST_DIR"     
+        chmod -R 777 /data 
+        chmod -R 777 /backups
       POST_BACKUP_SCRIPT: |
         echo "Backup done!"
       PRUNE_BACKUPS_DAYS: 5
