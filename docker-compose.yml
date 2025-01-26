@@ -30,7 +30,9 @@ services:
       RCON_HOST: minecraft-server
       PRE_BACKUP_SCRIPT: |
         echo "Before backup!"
-        echo "Also before backup from $$RCON_HOST to $$DEST_DIR"        
+        echo "Also before backup from $$RCON_HOST to $$DEST_DIR"     
+      POST_BACKUP_SCRIPT: |
+        echo "Backup done!"
       PRUNE_BACKUPS_DAYS: 5
     volumes:
       - minecraft-data:/data:ro
