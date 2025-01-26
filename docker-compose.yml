@@ -24,7 +24,7 @@ services:
     networks:
       - minecraft-networks
     command: >
-      sh -c "chmod -R 777 /data"
+      sh -c "chmod -R 777 /data && chmod -R 777 /backups"
     environment:
       BACKUP_INTERVAL: "24h"
       RCON_HOST: minecraft-server
