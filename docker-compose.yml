@@ -3,9 +3,9 @@ version: "3.8"
 services:
   minecraft-server:
     image: itzg/minecraft-server
-    container_name: "minecraft-server"
     networks:
       - cloudflare-tunnel
+      - minecraft-networks
     tty: true
     stdin_open: true
     ports:
@@ -40,6 +40,8 @@ networks:
   cloudflare-tunnel:
     external: true
     name: cloudflare-tunnel
+  minecraft-networks:
+    driver: bridge
 
 volumes:
   minecraft-data:
