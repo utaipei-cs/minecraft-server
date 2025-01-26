@@ -11,7 +11,7 @@ services:
     ports:
       - "25565:25565"
     command: >
-      sh -c "chmod -R 777 /data
+      sh -c "chmod -R 777 /data"
     environment:
       EULA: "TRUE"
       MEMORY: "6G"
