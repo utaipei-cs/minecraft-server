@@ -29,9 +29,12 @@ services:
       PRE_BACKUP_SCRIPT: |
         echo "Before backup!"
         echo "Also before backup from $$RCON_HOST to $$DEST_DIR"     
-        chmod -R 777 /data 
-        chmod -R 777 /backups
+        chmod -R 0777 /data 
+        chmod -R 0777 /backups
+        rcon-cli save-off
+        rcon-cli save-all
       POST_BACKUP_SCRIPT: |
+        rcon-cli save-on
         echo "Backup done!"
       PRUNE_BACKUPS_DAYS: 5
     volumes:
