@@ -39,7 +39,6 @@ networks:
     external: true
     name: cloudflare-tunnel
   minecraft-networks:
-    external: true
     name: minecraft-networks
   
 volumes:
