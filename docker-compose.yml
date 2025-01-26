@@ -33,17 +33,6 @@ services:
     volumes:
       - minecraft-data:/data:ro
       - minecraft-backup:/backups
-  minecraft-server-restore:
-    # Same image as mc, but any base image with bash and tar will work
-    image: itzg/mc-backup
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: none
-    entrypoint: restore-tar-backup
-    volumes:
-      - minecraft-data:/data:ro
-      - minecraft-backup:/backups
 
 networks:
   cloudflare-tunnel:
