@@ -16,6 +16,7 @@ services:
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
       MOTD: CSSA Minecraft Server
+      PAUSE_WHEN_EMPTY_SECONDS: 0
     volumes:
       - minecraft-data:/data
     deploy:
