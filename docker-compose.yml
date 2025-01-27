@@ -18,7 +18,11 @@ services:
       MOTD: CSSA Minecraft Server
     volumes:
       - minecraft-data:/data
-
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == ubuntu-docker-1
+    
   minecraft-server-backups:
     image: itzg/mc-backup
     networks:
@@ -35,7 +39,11 @@ services:
     volumes:
       - minecraft-data:/data:ro
       - minecraft-backup:/backups
-
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == ubuntu-docker-1
+    
 networks:
   cloudflare-tunnel:
     external: true
