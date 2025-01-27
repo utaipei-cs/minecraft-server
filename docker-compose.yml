@@ -10,10 +10,9 @@ services:
     stdin_open: true
     ports:
       - "25565:25565"
-    
     environment:
       EULA: "TRUE"
-      MEMORY: "6G"
+      MEMORY: "4G"
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
       MOTD: CSSA Minecraft Server
@@ -30,12 +29,7 @@ services:
       PRE_BACKUP_SCRIPT: |
         echo "Before backup!"
         echo "Also before backup from $$RCON_HOST to $$DEST_DIR"     
-        chmod -R 0777 /data 
-        chmod -R 0777 /backups
-        rcon-cli save-off
-        rcon-cli save-all
       POST_BACKUP_SCRIPT: |
-        rcon-cli save-on
         echo "Backup done!"
       PRUNE_BACKUPS_DAYS: 5
     volumes:
