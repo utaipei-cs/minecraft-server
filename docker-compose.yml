@@ -17,6 +17,7 @@ services:
       DIFFICULTY: "hard"
       MOTD: CSSA Minecraft Server
       PAUSE_WHEN_EMPTY_SECONDS: 0
+      MAX_TICK_TIME: -1
     volumes:
       - minecraft-data:/data
     deploy:
