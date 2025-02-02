@@ -43,12 +43,14 @@ networks:
 
 volumes:
   minecraft-data:
+    driver: local
     driver_opts:
-      type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,dir_mode=0777,file_mode=0777
-      device: //${NAS_IP}/mc/data
+      type: none
+      device: /home/cssa/minecraft_server/data
+      o: bind
   minecraft-backup:
+    driver: local
     driver_opts:
-      type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,dir_mode=0777,file_mode=0777
-      device: //${NAS_IP}/mc/backup
+      type: none
+      device: /home/cssa/minecraft_server/backup
+      o: bind
