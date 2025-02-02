@@ -12,7 +12,7 @@ services:
       - "25565:25565"
     environment:
       EULA: "TRUE"
-      MEMORY: "6G"
+      MEMORY: "8G"
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
       MOTD: CSSA Minecraft Server
@@ -67,10 +67,10 @@ volumes:
   minecraft-data:
     driver_opts:
       type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,cache=loose,actimeo=30,rsize=65536,wsize=65536
+      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0
       device: //${NAS_IP}/mc/data
   minecraft-backup:
     driver_opts:
       type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,cache=loose,actimeo=30,rsize=65536,wsize=65536
+      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0
       device: //${NAS_IP}/mc/backup
