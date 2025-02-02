@@ -12,7 +12,7 @@ services:
       - "25565:25565"
     environment:
       EULA: "TRUE"
-      MEMORY: "8G"
+      MEMORY: "6G"
       JVM_OPTS: "-XX:MaxRAMPercentage=75"
       DIFFICULTY: "hard"
       MOTD: CSSA Minecraft Server
@@ -20,18 +20,7 @@ services:
       MAX_TICK_TIME: -1
       
     volumes:
-      - minecraft-data:/data
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == ubuntu-docker-1
-      resources:
-        limits:
-          cpus: "2.5"   
-          memory: "8G"  
-        reservations:
-          cpus: "2" 
-          memory: "6G" 
+      - ./data:/data
   minecraft-server-backups:
     image: itzg/mc-backup
     networks:
@@ -46,15 +35,8 @@ services:
         echo "Backup done!"
       PRUNE_BACKUPS_DAYS: 5
     volumes:
-      - minecraft-data:/data:ro
-      - minecraft-backup:/backups
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == ubuntu-docker-1
-      resources:
-        limits:
-          memory: 2G
+      - ./data:/data:ro
+      - ./backup:/backups
     
 networks:
   cloudflare-tunnel:
@@ -62,15 +44,3 @@ networks:
     name: cloudflare-tunnel
   minecraft-networks:
     name: minecraft-networks
-  
-volumes:
-  minecraft-data:
-    driver_opts:
-      type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0
-      device: //${NAS_IP}/mc/data
-  minecraft-backup:
-    driver_opts:
-      type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0
-      device: //${NAS_IP}/mc/backup
