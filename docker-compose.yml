@@ -37,19 +37,17 @@ services:
     volumes:
       - ./data:/data:ro
       - ./backup:/backups
-
-  services:
-    agent:
-      image: portainer/agent:2.21.3
-      container_name: portainer_agent
-      restart: always
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - /var/lib/docker/volumes:/var/lib/docker/volumes
-      networks:
-        - agent_network
-      ports:
-        - "9001:9001"
+  agent:
+    image: portainer/agent:2.21.3
+    container_name: portainer_agent
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - agent_network
+    ports:
+      - "9001:9001"
 
 networks:
   agent_network:
