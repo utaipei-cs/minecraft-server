@@ -18,6 +18,13 @@ services:
       MOTD: CSSA Minecraft Server
       PAUSE_WHEN_EMPTY_SECONDS: 0
       MAX_TICK_TIME: -1
+    resources:
+        limits:
+          cpus: "2.5"   
+          memory: "8G"  
+        reservations:
+          cpus: "1.5"   
+          memory: "6G"   
     volumes:
       - minecraft-data:/data
     deploy:
