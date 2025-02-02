@@ -17,9 +17,10 @@ services:
       MOTD: CSSA Minecraft Server
       PAUSE_WHEN_EMPTY_SECONDS: 0
       MAX_TICK_TIME: -1
-      
+    restart: always
     volumes:
       - minecraft-data:/data
+
   minecraft-server-backups:
     image: itzg/mc-backup
     networks:
@@ -36,6 +37,7 @@ services:
     volumes:
       - minecraft-data:/data:ro
       - minecraft-backup:/backups
+    restart: always
 
 networks:
   minecraft-networks:
