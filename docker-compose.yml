@@ -45,6 +45,11 @@ services:
       placement:
         constraints:
           - node.hostname == ubuntu-docker-1
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
     
 networks:
   cloudflare-tunnel:
@@ -57,10 +62,10 @@ volumes:
   minecraft-data:
     driver_opts:
       type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,dir_mode=0777,file_mode=0777
+      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,cache=loose,actimeo=30,rsize=65536,wsize=65536
       device: //${NAS_IP}/mc/data
   minecraft-backup:
     driver_opts:
       type: cifs
-      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,dir_mode=0777,file_mode=0777
+      o: username=${NAS_USERNAME},password=${NAS_PASSWORD},vers=3.0,cache=loose,actimeo=30,rsize=65536,wsize=65536
       device: //${NAS_IP}/mc/backup
