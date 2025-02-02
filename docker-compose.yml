@@ -4,7 +4,6 @@ services:
   minecraft-server:
     image: itzg/minecraft-server
     networks:
-      - cloudflare-tunnel
       - minecraft-networks
     tty: true
     stdin_open: true
@@ -44,16 +43,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
-    networks:
-      - agent_network
     ports:
       - "9001:9001"
 
 networks:
-  agent_network:
-    driver: bridge
-  cloudflare-tunnel:
-    external: true
-    name: cloudflare-tunnel
   minecraft-networks:
     name: minecraft-networks
