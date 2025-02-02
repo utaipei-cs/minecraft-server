@@ -18,20 +18,20 @@ services:
       MOTD: CSSA Minecraft Server
       PAUSE_WHEN_EMPTY_SECONDS: 0
       MAX_TICK_TIME: -1
-    resources:
-        limits:
-          cpus: "1.5"   
-          memory: "4G"  
-        reservations:
-          cpus: "1" 
-          memory: "4G"   
+      
     volumes:
       - minecraft-data:/data
     deploy:
       placement:
         constraints:
           - node.hostname == ubuntu-docker-1
-    
+      resources:
+        limits:
+          cpus: "2"   
+          memory: "8G"  
+        reservations:
+          cpus: "1" 
+          memory: "6G" 
   minecraft-server-backups:
     image: itzg/mc-backup
     networks:
